@@ -9,7 +9,8 @@ use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
 use MfkSdk\Support\Str;
 
-class MfkApi implements MfkApiInterface
+
+class MfkApi
 {
     // シングルトンのインスタンスを保持するための静的プロパティ
     private static $instances = [];
@@ -46,6 +47,7 @@ class MfkApi implements MfkApiInterface
      */
     private function __(string $className)
     {
+        $className = Str::studly($className);
         $fullClassName = "MfkSdk\\Api\\{$className}Api";
 
         if (!class_exists($fullClassName))
@@ -64,7 +66,6 @@ class MfkApi implements MfkApiInterface
      */
     public function __call($method, $args)
     {
-        $className = Str::studly($method);
         return $this->__($method);
     }
 
@@ -72,6 +73,14 @@ class MfkApi implements MfkApiInterface
      * @return \MfkSdk\Api\CustomerApi
      */
     public function customer()
+    {
+        return $this->__(__FUNCTION__);
+    }
+
+    /**
+     * @return \MfkSdk\Api\CustomerExaminationApi
+     */
+    public function customerExamination()
     {
         return $this->__(__FUNCTION__);
     }

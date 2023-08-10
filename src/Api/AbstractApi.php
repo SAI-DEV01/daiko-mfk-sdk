@@ -2,6 +2,8 @@
 
 namespace MfkSdk\Api;
 
+use MfkSdk\Support\Str;
+
 abstract class AbstractApi
 {
     /**
@@ -46,12 +48,77 @@ abstract class AbstractApi
      * @param array $body
      * @return array
      */
-    protected function get(array $body = [])
+    protected function get(?array $body = [], $path = null)
     {
+        if ($path && !Str::startsWith($path, "/")) $path = "/" . $path;
         return json_decode($this->client->request(
             'GET',
-            $this->endpoint[$this->env] . $this->entrypoint,
+            $this->endpoint[$this->env] . $this->entrypoint . $path,
             ['query' => $body]
+        )->getBody(), true);
+    }
+
+    /**
+     * POST
+     *
+     * @param array $body
+     * @return array
+     */
+    protected function post(array $body = [], $path = null)
+    {
+        if ($path && !Str::startsWith($path, "/")) $path = "/" . $path;
+        return json_decode($this->client->request(
+            'POST',
+            $this->endpoint[$this->env] . $this->entrypoint . $path,
+            ['json' => $body]
+        )->getBody(), true);
+    }
+
+    /**
+     * PUT
+     *
+     * @param array $body
+     * @return array
+     */
+    protected function put(array $body = [], $path = null)
+    {
+        if ($path && !Str::startsWith($path, "/")) $path = "/" . $path;
+        return json_decode($this->client->request(
+            'PUT',
+            $this->endpoint[$this->env] . $this->entrypoint . $path,
+            ['json' => $body]
+        )->getBody(), true);
+    }
+
+    /**
+     * PATCH
+     *
+     * @param array $body
+     * @return array
+     */
+    protected function patch(array $body = [], $path = null)
+    {
+        if ($path && !Str::startsWith($path, "/")) $path = "/" . $path;
+        return json_decode($this->client->request(
+            'PATCH',
+            $this->endpoint[$this->env] . $this->entrypoint . $path,
+            ['json' => $body]
+        )->getBody(), true);
+    }
+
+    /**
+     * DELETE
+     *
+     * @param array $body
+     * @return array
+     */
+    protected function delete(array $body = [], $path = null)
+    {
+        if ($path && !Str::startsWith($path, "/")) $path = "/" . $path;
+        return json_decode($this->client->request(
+            'DELETE',
+            $this->endpoint[$this->env] . $this->entrypoint . $path,
+            ['json' => $body]
         )->getBody(), true);
     }
 }
