@@ -3,10 +3,10 @@
 namespace MfkSdk;
 
 use MfkSdk\Support\Str;
-use GuzzleHttp\Client;
+
 use GuzzleHttp\Exception\BadResponseException;
 
-class MfkServiceTest
+class test
 {
     private $endpoint = "https://sandbox-api.mfkessai.co.jp/v2/";
 
@@ -15,18 +15,6 @@ class MfkServiceTest
     protected $client;
 
     protected $headers;
-
-    public function __construct()
-    {
-        $this->client = new Client();
-        $this->headers = [
-            'Content-Type' => 'application/json',
-            'Accept' => 'application/json',
-            'apikey' => "uuFiotB3miPUyZ1c04PzUKmzCLT9rbsX", // 取引代行
-            // 'apikey' => "d3Ln39DO1rHmiiZceABIHAwPdQMpcFOa", // 請求代行
-        ];
-        session_start();
-    }
 
     public function index()
     {
