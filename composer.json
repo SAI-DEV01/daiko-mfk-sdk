@@ -1,0 +1,19 @@
+{
+    "name": "zushik/mfk-sdk",
+    "autoload": {
+        "psr-4": {
+            "MfkSdk\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "zushi"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.7",
+        "str/str": "^1.1",
+        "ramsey/uuid": "^4.7",
+        "doctrine/inflector": "^2.0"
+    }
+}
