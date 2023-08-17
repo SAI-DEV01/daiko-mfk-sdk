@@ -92,4 +92,12 @@ class MfkApi
     {
         return $this->__(__FUNCTION__);
     }
+
+    /**
+     * @return \MfkSdk\Api\TransactionApi
+     */
+    public function transaction()
+    {
+        return $this->__(__FUNCTION__);
+    }
 }
