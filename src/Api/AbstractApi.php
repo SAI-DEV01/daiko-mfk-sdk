@@ -10,7 +10,7 @@ abstract class AbstractApi
      * API ENV
      * @var string
      */
-    public $env = "sandbox";
+    protected $env = "sandbox";
 
     /**
      * Guzzleクライアント Singleton instance
