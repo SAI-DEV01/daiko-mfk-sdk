@@ -84,4 +84,12 @@ class MfkApi
     {
         return $this->__(__FUNCTION__);
     }
+
+    /**
+     * @return \MfkSdk\Api\CreditFacilityApi
+     */
+    public function creditFacility()
+    {
+        return $this->__(__FUNCTION__);
+    }
 }
