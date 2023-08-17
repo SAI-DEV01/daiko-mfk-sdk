@@ -124,4 +124,12 @@ class MfkApi
     {
         return $this->__(__FUNCTION__);
     }
+
+    /**
+     * @return \MfkSdk\Api\PayoutTransactionApi
+     */
+    public function payoutTransaction()
+    {
+        return $this->__(__FUNCTION__);
+    }
 }
