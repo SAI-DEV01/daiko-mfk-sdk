@@ -100,4 +100,12 @@ class MfkApi
     {
         return $this->__(__FUNCTION__);
     }
+
+    /**
+     * @return \MfkSdk\Api\DestinationApi
+     */
+    public function destination()
+    {
+        return $this->__(__FUNCTION__);
+    }
 }
