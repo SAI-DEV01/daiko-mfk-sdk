@@ -50,10 +50,9 @@ abstract class AbstractApi
      */
     protected function get(?array $body = [], $path = null)
     {
-        if ($path && !Str::startsWith($path, "/")) $path = "/" . $path;
         return json_decode($this->client->request(
             'GET',
-            $this->endpoint[$this->env] . $this->entrypoint . $path,
+            $this->uri($path),
             ['query' => $body]
         )->getBody(), true);
     }
@@ -66,10 +65,9 @@ abstract class AbstractApi
      */
     protected function post(array $body = [], $path = null)
     {
-        if ($path && !Str::startsWith($path, "/")) $path = "/" . $path;
         return json_decode($this->client->request(
             'POST',
-            $this->endpoint[$this->env] . $this->entrypoint . $path,
+            $this->uri($path),
             ['json' => $body]
         )->getBody(), true);
     }
@@ -82,10 +80,9 @@ abstract class AbstractApi
      */
     protected function put(array $body = [], $path = null)
     {
-        if ($path && !Str::startsWith($path, "/")) $path = "/" . $path;
         return json_decode($this->client->request(
             'PUT',
-            $this->endpoint[$this->env] . $this->entrypoint . $path,
+            $this->uri($path),
             ['json' => $body]
         )->getBody(), true);
     }
@@ -98,10 +95,9 @@ abstract class AbstractApi
      */
     protected function patch(array $body = [], $path = null)
     {
-        if ($path && !Str::startsWith($path, "/")) $path = "/" . $path;
         return json_decode($this->client->request(
             'PATCH',
-            $this->endpoint[$this->env] . $this->entrypoint . $path,
+            $this->uri($path),
             ['json' => $body]
         )->getBody(), true);
     }
@@ -114,11 +110,22 @@ abstract class AbstractApi
      */
     protected function delete(array $body = [], $path = null)
     {
-        if ($path && !Str::startsWith($path, "/")) $path = "/" . $path;
         return json_decode($this->client->request(
             'DELETE',
-            $this->endpoint[$this->env] . $this->entrypoint . $path,
+            $this->uri($path),
             ['json' => $body]
         )->getBody(), true);
+    }
+
+    /**
+     * Request URI
+     *
+     * @param string|null $path
+     * @return string
+     */
+    private function uri(string $path = null)
+    {
+        if ($path && !Str::startsWith($path, "/")) $path = "/" . $path;
+        return $this->endpoint[$this->env] . $this->entrypoint . $path;
     }
 }
