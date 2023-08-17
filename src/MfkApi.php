@@ -140,4 +140,12 @@ class MfkApi
     {
         return $this->__(__FUNCTION__);
     }
+
+    /**
+     * @return \MfkSdk\Api\AuthorizationApi
+     */
+    public function authorization()
+    {
+        return $this->__(__FUNCTION__);
+    }
 }
