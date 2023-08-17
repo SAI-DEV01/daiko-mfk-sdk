@@ -132,4 +132,12 @@ class MfkApi
     {
         return $this->__(__FUNCTION__);
     }
+
+    /**
+     * @return \MfkSdk\Api\CustomerNameUpdateApi
+     */
+    public function customerNameUpdate()
+    {
+        return $this->__(__FUNCTION__);
+    }
 }
