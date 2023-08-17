@@ -108,4 +108,12 @@ class MfkApi
     {
         return $this->__(__FUNCTION__);
     }
+
+    /**
+     * @return \MfkSdk\Api\BillingApi
+     */
+    public function billing()
+    {
+        return $this->__(__FUNCTION__);
+    }
 }
