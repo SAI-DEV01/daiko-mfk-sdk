@@ -30,9 +30,11 @@ abstract class AbstractApi
         "sandbox" => "https://sandbox-api.mfkessai.co.jp/v2/"
     ];
 
-    public function __construct($client)
+    public function __construct($client, $env)
     {
         $this->client = $client;
+        if ($env === "prodcution" || $env === "sandbox") $this->env = $env;
+        else if ($env !== null) throw new \Exception("Uncorrect env value. please select from production or sandbox.");
     }
 
     /**

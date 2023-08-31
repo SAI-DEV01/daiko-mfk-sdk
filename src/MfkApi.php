@@ -34,11 +34,19 @@ class MfkApi
     protected static $client;
 
     /**
+     * API ENV production|sandbox
+     *
+     * @var production|sandbox
+     */
+    protected $env;
+
+    /**
      * @param string $apikey
      * @return $this
      */
-    public function __construct(string $apikey)
+    public function __construct(string $apikey, $env = null)
     {
+        $this->env = $env;
         if (null === self::$client) {
             self::$client = new Client(
                 [
@@ -68,7 +76,7 @@ class MfkApi
             throw new Exception("Class $fullClassName does not exist.");
 
         if (!isset(self::$instances[$fullClassName]))
-            self::$instances[$fullClassName] = new $fullClassName(self::$client);
+            self::$instances[$fullClassName] = new $fullClassName(self::$client, $this->env);
 
         return self::$instances[$fullClassName];
     }
