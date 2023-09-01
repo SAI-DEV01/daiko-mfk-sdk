@@ -24,7 +24,7 @@ use MfkSdk\Support\Str;
 class MfkApi
 {
     // シングルトンのインスタンスを保持するための静的プロパティ
-    private static $instances = [];
+    private $instances = [];
 
     /**
      * Guzzleクライアント Singleton instance
@@ -47,7 +47,7 @@ class MfkApi
     public function __construct(string $apikey, $env = null)
     {
         $this->env = $env;
-        $this::$client = new Client(
+        $this->client = new Client(
             [
                 RequestOptions::HEADERS => [
                     'Content-Type' => 'application/json',
@@ -73,9 +73,9 @@ class MfkApi
         if (!class_exists($fullClassName))
             throw new Exception("Class $fullClassName does not exist.");
 
-        if (!isset(self::$instances[$fullClassName]))
-            self::$instances[$fullClassName] = new $fullClassName($this::$client, $this->env);
+        if (!isset($this->instances[$fullClassName]))
+            $this->instances[$fullClassName] = new $fullClassName($this->client, $this->env);
 
-        return self::$instances[$fullClassName];
+        return $this->instances[$fullClassName];
     }
 }
