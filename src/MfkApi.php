@@ -31,7 +31,7 @@ class MfkApi
      *
      * @var Client
      */
-    protected static $client;
+    protected $client;
 
     /**
      * API ENV production|sandbox
@@ -47,17 +47,15 @@ class MfkApi
     public function __construct(string $apikey, $env = null)
     {
         $this->env = $env;
-        if (null === self::$client) {
-            self::$client = new Client(
-                [
-                    RequestOptions::HEADERS => [
-                        'Content-Type' => 'application/json',
-                        'Accept' => 'application/json',
-                        'apikey' => $apikey,
-                    ]
+        $this::$client = new Client(
+            [
+                RequestOptions::HEADERS => [
+                    'Content-Type' => 'application/json',
+                    'Accept' => 'application/json',
+                    'apikey' => $apikey,
                 ]
-            );
-        }
+            ]
+        );
         return $this;
     }
 
@@ -76,7 +74,7 @@ class MfkApi
             throw new Exception("Class $fullClassName does not exist.");
 
         if (!isset(self::$instances[$fullClassName]))
-            self::$instances[$fullClassName] = new $fullClassName(self::$client, $this->env);
+            self::$instances[$fullClassName] = new $fullClassName($this::$client, $this->env);
 
         return self::$instances[$fullClassName];
     }
